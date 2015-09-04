@@ -11,26 +11,23 @@ namespace Sistemas_Inteligentes
         private int depth;
         public int[,] currentState;
 
-        public matrixState(int n0, int n1, int n2,
-            int n3, int n4, int n5, int n6, int n7,
-            int n8, int n9, int n10, int n11, int n12,
-            int n13, int n14, int n15)
+        public matrixState(int n0, int n1, int n2, int n3, 
+            int n4, int n5, int n6, int n7,int n8)
         {
             currentState = new int[,]
             {
-                {n0,  n1,  n2,  n3 },
-                {n4,  n5,  n6,  n7 },
-                {n8,  n9,  n10, n11},
-                {n12, n13, n14, n15}
+                {n0, n1, n2},
+                {n3, n4, n5},
+                {n6, n7, n8}
             };
         }
 
         public void printMatrix()
         { 
-            for(int i = 0; i< 4; i++)
+            for(int i = 0; i< 3; i++)
             {
                 Console.Write("\n\t");
-                for(int j = 0; j<4; j++)
+                for(int j = 0; j<3; j++)
                 {
                     int n = currentState[i,j];
                     if (n != 0)
@@ -51,8 +48,8 @@ namespace Sistemas_Inteligentes
 
         public bool comparison(matrixState other)
         {
-            for (int i = 0; i < 4; i++)
-                for (int j = 0; j < 4; j++)
+            for (int i = 0; i < 3; i++)
+                for (int j = 0; j < 3; j++)
                     if (currentState[i, j] != other.currentState[i, j])
                         return false;
             return true;
