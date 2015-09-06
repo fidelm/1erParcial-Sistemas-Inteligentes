@@ -146,7 +146,7 @@ namespace Sistemas_Inteligentes
                 // Detect which element is the null one.
                 for (int raw = 0; raw < 4; raw++)
                     for (int column = 0; column < 4; column++)
-                        if (currentState.currentState[raw, column] == 0)
+                        if (currentState.currentNumberStates[raw, column] == 0)
                         {
                             x = column; y = raw;
                             break;
@@ -222,7 +222,7 @@ namespace Sistemas_Inteligentes
             // Detect which element is the null one.
             for (int raw = 0; raw < 4; raw++)
                 for (int column = 0; column < 4; column++)
-                    if (currentState.currentState[raw, column] == 0)
+                    if (currentState.currentNumberStates[raw, column] == 0)
                     {
                         x = column; y = raw;
                         break;
@@ -231,23 +231,23 @@ namespace Sistemas_Inteligentes
             {
                 case 0:
                     // Up
-                    newState.currentState[y, x] = newState.currentState[y - 1, x];
-                    newState.currentState[y - 1, x] = 0;
+                    newState.currentNumberStates[y, x] = newState.currentNumberStates[y - 1, x];
+                    newState.currentNumberStates[y - 1, x] = 0;
                     break;
                 case 1:
                     // Down
-                    newState.currentState[y, x] = newState.currentState[y + 1, x];
-                    newState.currentState[y + 1, x] = 0;
+                    newState.currentNumberStates[y, x] = newState.currentNumberStates[y + 1, x];
+                    newState.currentNumberStates[y + 1, x] = 0;
                     break;
                 case 2:
                     // Left
-                    newState.currentState[y, x] = newState.currentState[y, x - 1];
-                    newState.currentState[y, x - 1] = 0;
+                    newState.currentNumberStates[y, x] = newState.currentNumberStates[y, x - 1];
+                    newState.currentNumberStates[y, x - 1] = 0;
                     break;
                 case 3:
                     // Right
-                    newState.currentState[y, x] = newState.currentState[y, x + 1];
-                    newState.currentState[y, x + 1] = 0;
+                    newState.currentNumberStates[y, x] = newState.currentNumberStates[y, x + 1];
+                    newState.currentNumberStates[y, x + 1] = 0;
                     break;
                 default:
                     // Invalid movement

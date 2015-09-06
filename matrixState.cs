@@ -9,38 +9,22 @@ namespace Sistemas_Inteligentes
 {
     class matrixState
     {
-
-        private int depth;
-        public int[,] currentState;
-        public ArrayList previosSteps;
-        /// <summary>
-        /// Steps:
-        ///     0 Up
-        ///     1 Down
-        ///     2 Left
-        ///     3 Right
-        /// </summary>
-
+        public int[,] currentNumberStates;
 
         public matrixState()
         {
-            previosSteps = new ArrayList();
-            depth = 0;
-            currentState = new int[3, 3];
+            currentNumberStates = new int[3, 3];
         }
 
         public matrixState(int n0, int n1, int n2, int n3, 
             int n4, int n5, int n6, int n7, int n8)
         {
-            currentState = new int[,]
+            currentNumberStates = new int[,]
             {
-                {n0,  n1,  n2},
-                {n3,  n4,  n5},
-                {n6,  n7,  n8}
+                {n0, n1, n2},
+                {n3, n4, n5},
+                {n6, n7, n8}
             };
-
-            previosSteps = new ArrayList();
-            depth = 0;
         }
 
         public void printMatrix()
@@ -50,7 +34,7 @@ namespace Sistemas_Inteligentes
                 Console.Write("\n\t");
                 for (int j = 0; j < 3; j++)
                 {
-                    int n = currentState[i, j];
+                    int n = currentNumberStates[i, j];
                     if (n != 0)
                     {
                         Console.Write(n);
@@ -63,15 +47,11 @@ namespace Sistemas_Inteligentes
             }
         }
 
-        public void setDepth(int depth) { this.depth = depth; }
-
-        public int getDepth() { return depth; }
-
         public bool comparison(matrixState other)
         {
             for (int i = 0; i < 3; i++)
                 for (int j = 0; j < 3; j++)
-                    if (currentState[i, j] != other.currentState[i, j])
+                    if (currentNumberStates[i, j] != other.currentNumberStates[i, j])
                         return false;
             return true;
         }
@@ -80,9 +60,7 @@ namespace Sistemas_Inteligentes
         {
             for (int i = 0; i < 3; i++)
                 for (int j = 0; j < 3; j++)
-                    external.currentState[i, j] = currentState[i, j];
-            external.setDepth(depth);
-            external.previosSteps = previosSteps;
+                    external.currentNumberStates[i, j] = currentNumberStates[i, j];
         }
     }
 }
