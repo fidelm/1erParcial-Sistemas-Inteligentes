@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Sistemas_Inteligentes.repoGit
+namespace Sistemas_Inteligentes
 {
     class BAmplitud
     {
@@ -40,11 +40,13 @@ namespace Sistemas_Inteligentes.repoGit
             matrixState current = new matrixState();
 
             posibilidades_cola.Enqueue(calculatedSteps);
+            origin.printMatrix();
             while(!solved)
             {
                 origin.setValues(current);
                 ArrayList currentMovements = (ArrayList) posibilidades_cola.Dequeue();
-                goTroughtMovements(current, currentMovements);
+                
+                goTroughtMovements(current, currentMovements, false);
                 if (current.comparison(goal))
                 {
                     solved = true;
@@ -138,10 +140,17 @@ namespace Sistemas_Inteligentes.repoGit
             }
         }
 
-        void goTroughtMovements(matrixState ma, ArrayList moves)
+        public void goTroughtMovements(matrixState ma, ArrayList moves, bool print)
         {
             for (int i = 0; i < moves.Count; i++)
+            {
                 makeMovement(ma, (int)moves[i]);
+                if (print)
+                {
+                    Console.WriteLine("\n");
+                    ma.printMatrix();
+                }
+            }
         }
 
         public ArrayList solucion()
