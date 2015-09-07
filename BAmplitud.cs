@@ -40,7 +40,6 @@ namespace Sistemas_Inteligentes
             matrixState current = new matrixState();
 
             posibilidades_cola.Enqueue(calculatedSteps);
-            origin.printMatrix();
             while(!solved)
             {
                 origin.setValues(current);
@@ -55,15 +54,20 @@ namespace Sistemas_Inteligentes
                 }
                 else 
                 {
-                    foreach (int movement in available_movements(current))
+                    int last = 10;
+                    if (currentMovements.Count != 0)
+                        last = (int)currentMovements[currentMovements.Count - 1];
+
+                    foreach (int movement in available_movements(current, last))
                     {
                         ArrayList currentMovesPlus1 = new ArrayList();
                         copyArrays(currentMovements, currentMovesPlus1);
                         currentMovesPlus1.Add(movement);
                         posibilidades_cola.Enqueue(currentMovesPlus1);
                     }
-                }
 
+
+                }
                 if (currentMovements.Count > maxDepth)
                 {
                     posible = false;
@@ -81,17 +85,21 @@ namespace Sistemas_Inteligentes
         ///     2 Left
         ///     3 Right
         /// </summary>
-        ArrayList available_movements(matrixState ma) 
+        ArrayList available_movements(matrixState ma, int last) 
         {
             ArrayList alternatives = new ArrayList();
             for (int fila = 0; fila < 3; fila++)
                 for (int columna = 0; columna < 3; columna++)
                     if (ma.currentNumberStates[fila, columna] == 0)
                     {
-                        if (fila != 0)      alternatives.Add(2);
-                        if (fila != 2)      alternatives.Add(3);
-                        if (columna != 0)   alternatives.Add(0);
-                        if (columna != 2)   alternatives.Add(1);
+                        // up
+                        if (fila != 0 && last != 1)      alternatives.Add(0);
+                        //Down
+                        if (fila != 2 && last != 0)      alternatives.Add(1);
+                        // Left
+                        if (columna != 0 && last != 3)   alternatives.Add(2);
+                        // Right
+                        if (columna != 2 && last != 2)   alternatives.Add(3);
                     }
             return alternatives;
         }
@@ -142,6 +150,11 @@ namespace Sistemas_Inteligentes
 
         public void goTroughtMovements(matrixState ma, ArrayList moves, bool print)
         {
+            if (print)
+            {
+                Console.WriteLine("\n");
+                ma.printMatrix();
+            }
             for (int i = 0; i < moves.Count; i++)
             {
                 makeMovement(ma, (int)moves[i]);

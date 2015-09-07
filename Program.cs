@@ -29,7 +29,7 @@ namespace Sistemas_Inteligentes
                         break;
                     case 2:
                         // Ingresa meta
-                        matrix_goal = new matrixState(1, 2, 0, 3, 4, 5, 6, 7, 8);
+                        matrix_goal = new matrixState(1, 2, 3, 4, 5, 6, 7, 8, 0);
                         busqueda_amplitud.setDestiny(matrix_goal);
                         destino = true;                        
                         break;
@@ -52,13 +52,19 @@ namespace Sistemas_Inteligentes
                         if (origen && destino)
                         {
                             Console.WriteLine("\n\n\t   Busqueda por amplitud");
-                            busqueda_amplitud.calculate_steps(20);
-                            matrixState auxiliar = new matrixState();
-                            matrix_origin.setValues(auxiliar);
-                            busqueda_amplitud.goTroughtMovements(auxiliar, busqueda_amplitud.solucion(), true);
-                            Console.WriteLine("\n\n\tCantidad optima de movimientos: " +
-                                busqueda_amplitud.solucion().Count);
-                            Console.WriteLine("\n");
+                            if (busqueda_amplitud.calculate_steps(35))
+                            {
+                                matrixState auxiliar = new matrixState();
+                                matrix_origin.setValues(auxiliar);
+                                busqueda_amplitud.goTroughtMovements(auxiliar, busqueda_amplitud.solucion(), true);
+                                Console.WriteLine("\n\n\tCantidad optima de movimientos: " +
+                                    busqueda_amplitud.solucion().Count);
+                                Console.WriteLine("\n");
+                            }
+                            else 
+                            {
+                                Console.WriteLine("\n\n\t No se encontro solucion");
+                            }
                         }
                         else 
                         {
